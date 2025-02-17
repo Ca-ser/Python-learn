@@ -9,16 +9,15 @@ def main():
         # 使用 with as 创建游标对象， 在执行完 SQL 语句 使其自动关闭
         with conn.cursor() as cursor:
             # 创建 表 Students 并指定 表结构
-            result = cursor.execute('CREATE TABLE students2 (name VARCHAR(20),age VARCHAR(6),grade VARCHAR(20))')
-            # 判断是否成功创建表
-            if result == 0:
-                print('添加成功')
+            result = cursor.execute('DELETE from students where name = "zwt" ')
+            # 判断是否成功删除
+            if result == 1:
+                print('删除成功')
             # 提交操作到数据库
             conn.commit()
     # 出现异常 数据插入/修改 失败 则rollback (回滚)
     except pymysql.MySQLError as error:
         print(error)
-        print("添加失败")
         conn.rollback()
     # 关闭连接
     finally:
@@ -27,5 +26,3 @@ def main():
     print(conn)
 if __name__ == '__main__':
     main()
-
-

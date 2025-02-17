@@ -8,10 +8,10 @@ def main():
     try:
         # 使用 with as 创建游标对象， 在执行完 SQL 语句 使其自动关闭
         with conn.cursor() as cursor:
-            # 创建 表 Students 并指定 表结构
-            result = cursor.execute('CREATE TABLE students2 (name VARCHAR(20),age VARCHAR(6),grade VARCHAR(20))')
-            # 判断是否成功创建表
-            if result == 0:
+            # 插入数据 到 students 表中
+            result = cursor.execute('INSERT INTO students VALUES("KFC",12,"nan")')
+            # 判断是否成功插入
+            if result == 1:
                 print('添加成功')
             # 提交操作到数据库
             conn.commit()

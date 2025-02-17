@@ -2,23 +2,20 @@ import pymysql
 
 # 创建主函数
 def main():
+    # table = input("请输入要查询的表")
+    # name = input("请输入要查询的姓名")
     # 创建 数据库连接池 （从左到右 分别是 ip ; 端口号 ; 用户名 ; 密码 ; 数据库 ; 编码：）
     conn = pymysql.connect(host='localhost', port=3306, user='root', password='Qwer12345', db='pymyuser', charset='utf8')
 
     try:
         # 使用 with as 创建游标对象， 在执行完 SQL 语句 使其自动关闭
         with conn.cursor() as cursor:
-            # 删除 表中 指定 数据
-            result = cursor.execute('DELETE from students where name = "zwt" ')
-            # 判断是否成功删除
-            if result == 1:
-                print('删除成功')
-            # 提交操作到数据库
-            conn.commit()
-    # 出现异常 数据插入/修改/删除 失败 则rollback (回滚)
-    except pymysql.MySQLError as error:
-        print(error)
-        conn.rollback()
+            # 查询 表中 的 数据
+            cursor.execute('SELECT * from students ')
+            for row in cursor.fetchall():
+                print(f'姓名： {row[0]}')
+                print(f'年龄： {row[1]}')
+                print(f'性别： {row[2]}')
     # 关闭连接
     finally:
         conn.close()
@@ -26,3 +23,5 @@ def main():
     print(conn)
 if __name__ == '__main__':
     main()
+
+

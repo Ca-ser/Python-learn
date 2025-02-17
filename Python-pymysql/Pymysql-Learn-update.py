@@ -10,14 +10,14 @@ def main():
     try:
         # 使用 with as 创建游标对象， 在执行完 SQL 语句 使其自动关闭
         with conn.cursor() as cursor:
-            # 创建 表 Students 并指定 表结构
+            # 更新 表中内容
             result = cursor.execute('UPDATE students set name = %s where name = %s', (oldname, newname))
-            # 判断是否成功删除
+            # 判断是否成功更新
             if result == 1:
                 print('更新成功')
             # 提交操作到数据库
             conn.commit()
-    # 出现异常 数据插入/修改 失败 则rollback (回滚)
+    # 出现异常 数据插入/修改/删除 失败 则rollback (回滚)
     except pymysql.MySQLError as error:
         print(error)
         conn.rollback()

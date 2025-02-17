@@ -15,7 +15,7 @@ def main():
                 print('添加成功')
             # 提交操作到数据库
             conn.commit()
-    # 出现异常 数据插入/修改 失败 则rollback (回滚)
+    # 出现异常 数据插入/修改/删除 失败 则rollback (回滚)
     except pymysql.MySQLError as error:
         print(error)
         print("添加失败")
